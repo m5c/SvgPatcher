@@ -80,7 +80,7 @@ None, this is all built-in Java functionality  :)
 
 ## Contact / Pull Requests
 
- * Author: Maximilian Schiedermeier ![email](email.png)
+ * Author: Maximilian Schiedermeier ![email](markdown/email.png)
  * Github: Kartoffelquadrat
  * Webpage: https://www.cs.mcgill.ca/~mschie3
  * License: [MIT](https://opensource.org/licenses/MIT)

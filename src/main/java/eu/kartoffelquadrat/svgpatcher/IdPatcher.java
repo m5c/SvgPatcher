@@ -22,18 +22,19 @@ public class IdPatcher {
      * <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="34.156" y="15">361</tspan>
      * </text>
      * </g>
-     *
+     * <p>
      * What we want is:
-     *       <g id="VID-SQUARE1">
-     *         <title>VID-SQUARE1</title>
-     *         <rect x="230.8" y="193.9" width="105" height="105" fill="#40ff40"/>
-     *         <rect x="230.8" y="193.9" width="105" height="105" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
-     *         <text transform="translate(235.8 237.176)" fill="black">
-     *           <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="34.156" y="15">361</tspan>
-     *         </text>
-     *       </g>
-     *
+     * <g id="VID-SQUARE1">
+     * <rect x="230.8" y="193.9" width="105" height="105" fill="#40ff40"/>
+     * <rect x="230.8" y="193.9" width="105" height="105" stroke="black" stroke-linecap="round" stroke-linejoin="round"
+     * stroke-width="1"/>
+     * <text transform="translate(235.8 237.176)" fill="black">
+     * <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="34.156" y="15">361</tspan>
+     * </text>
+     * </g>
+     * <p>
      * This method handles this transformation for an entire svg document.
+     *
      * @param svg
      */
     public static Document patchAllOmnigraffleIds(Document svg) {

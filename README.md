@@ -4,7 +4,7 @@ Minimal project to demonstrate xml handling using pom files.
 
 ## About
 
-This project is based on code presented on [mkyong](https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/).  
+This project parts from the code presented on [mkyong](https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/).  
 Input files and handling have been adapted for the purpose of ```pom.xml```handling.
 
 ## How to run

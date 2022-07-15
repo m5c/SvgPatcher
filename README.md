@@ -4,9 +4,10 @@ Minimal DOM transformer that patches SVG files exported by OmniGraffle.
 
 ## About
 
-Building user interfaces with a vector program like OmniGraffle is fun. Yet if your interface is more than static you will need DOM manipulations. Unfortunatley this also means you need a reliable way to target indidiual nodes in your SVG DOM tree. Omnigraffle allows setting IDs, but for whatever reason the programmers decided to disregard the existing way of identifying svg elements (using the ```id``` tag). Instead omnigraffle adds a child node named ```title```.
+Building user interfaces with a vector program like OmniGraffle is fun.  
+Yet if your interface is more than static you will need DOM manipulations. Unfortunately this also means you need a reliable way to target individual nodes in your SVG DOM tree. OmniGraffle allows setting IDs, but for whatever reason the programmers decided to disregard the existing way of identifying svg elements (using the ```id``` tag). OmniGraffle only adds a child node named ```title```.
 This little program patches SVG files, so the set IDs are where they are supposed to be, *in the node's ```id``` attribute.*  
-In addition to that the program patches the default svg dimensions to something so gigantic (5000x5000) that whatever browser using this graphic is forced to apply the css scaling rules you may have enabled.
+In addition to that the program patches the default svg dimensions to something so gigantic (5000x5000) that whatever browser using this graphic must apply the css scaling rules you may have enabled.
 
 ## How to run
 

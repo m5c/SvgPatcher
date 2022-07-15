@@ -18,7 +18,45 @@ In addition to that the program patches the default svg dimensions to somethign 
 ```mvn clean package exec:run```
  * The patched svg lies in tmp: ```/tmp/patchedVectorBoard.svg```
 
+## How it works:
 
+### SVG Dimensions
+
+Changes this line:  
+```xml
+<svg [...] width="211.2" height="211.5">
+```
+
+To:  
+```xml
+<svg [...] width="5000" height="5000">
+```
+
+
+### SVG IDs
+
+Changes these patterns:  
+```xml
+      <g id="Graphic_3">
+        <title>VID-SQUARE1</title>
+        <rect x="230.8" y="193.9" width="105" height="105" fill="#40ff40"/>
+        <rect x="230.8" y="193.9" width="105" height="105" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(235.8 237.176)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="34.156" y="15">361</tspan>
+        </text>
+      </g>
+```
+
+To:  
+```xml
+      <g id="VID_SQUARE1">
+        <rect x="230.8" y="193.9" width="105" height="105" fill="#40ff40"/>
+        <rect x="230.8" y="193.9" width="105" height="105" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(235.8 237.176)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="34.156" y="15">361</tspan>
+        </text>
+      </g>
+```
 
 ## Dependencies
 

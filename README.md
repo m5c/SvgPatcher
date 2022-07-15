@@ -1,36 +1,31 @@
-# XML Parse Demo
+# SVG for web-use patcher
 
-Minimal project to demonstrate xml handling using pom files.
+Minimal DOM transformer that patches SVG files exported by omnigraffle.
 
 ## About
 
-This project parts from the code presented on [mkyong](https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/).  
-Input files and handling have been adapted for the purpose of ```pom.xml```handling.
+Building user interfaces with a vector program like Omnigraffle is fun. Yet if your interface is more than static you will need DOM manipulations. Unfortunatley this also means you need a reliable way to target indidiual nodes in your SVG DOM tree. Omnigraffle allows setting IDs, but for whatever reason the programmers decided to disregard the existing way of identifying svg elements (using the ```id``` tag). Instead omnigraffle adds a child node named ```title```.
+This little program patches SVG files so the set IDs are where they are supposed to be, *in the node's ```id``` attribute.*
 
 ## How to run
 
  * ```cd``` into project.
+ * replace ```vectorBoard.svg``` by the svg generated with Omnigraffle.
  * Once, add this VM argument as maven default (Allows dynamic loading of xml doctype definitions. This is required to parse the provided svg file.):  
  ```export MAVEN_OPTS="-Djavax.xml.accessExternalDTD=all"```
  * Start the software (make sure ```pom.xml``` is at call location)  
 ```mvn clean package exec:run```
+ * The patched svg lies in tmp: ```/tmp/patchedVectorBoard.svg```
 
-## Procedure
+## Dependencies
 
- * Program parses it's own maven configuration [```pom.xml```](pom.xml).
- * Program walks through loaded tree and prints dependency info:  
-```
-Root Element :project
-------
-GroupId: junit
-ArtifactId: junit
-Version: 3.8.1
------
-GroupId: org.apache.logging.log4j
-ArtifactId: log4j-core
-Version: 2.14.1
------
-```
- * Program exports in-ram tree representation back into an xml file (```pom2.xml```).
+None :)
+
+## Contact / Pull Requests
+
+ * Author: Maximilian Schiedermeier ![email](email.png)
+ * Github: Kartoffelquadrat
+ * Webpage: https://www.cs.mcgill.ca/~mschie3
+ * License: [MIT](https://opensource.org/licenses/MIT)
 
 

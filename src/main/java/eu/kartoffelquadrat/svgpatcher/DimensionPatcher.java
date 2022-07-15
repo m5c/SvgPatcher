@@ -2,9 +2,13 @@ package eu.kartoffelquadrat.svgpatcher;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * Little helper class to boost svg dimensions to 5000x5000, regardless of original size.
+ *
+ * @author Maximilian Schiedermeier, 2022s
+ */
 public class DimensionPatcher {
 
     /**
@@ -15,23 +19,10 @@ public class DimensionPatcher {
      */
     public static Document patchSvgDimensions(Document svg) {
 
-        printAllChildNodes(svg);
-
         NodeList svgElementList = svg.getElementsByTagName("svg");
         NamedNodeMap attributes = svgElementList.item(0).getAttributes();
         attributes.getNamedItem("width").setNodeValue("5000");
         attributes.getNamedItem("height").setNodeValue("5000");
         return svg;
     }
-
-    public static void printAllChildNodes(Node node) {
-        System.out.println(node);
-
-        NodeList nodeList = node.getChildNodes();
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Node currentNode = nodeList.item(i);
-            printAllChildNodes(currentNode);
-        }
-    }
-
 }

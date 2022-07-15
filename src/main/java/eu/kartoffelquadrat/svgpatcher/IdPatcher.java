@@ -1,6 +1,11 @@
 package eu.kartoffelquadrat.svgpatcher;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import static eu.kartoffelquadrat.svgpatcher.XmlNodelistIteratorTools.asList;
 
 /**
  * Maximilian Schiedermeier 2022
@@ -39,13 +44,17 @@ public class IdPatcher {
      */
     public static Document patchAllOmnigraffleIds(Document svg) {
 
+        NodeList titleElements = svg.getElementsByTagName("title");
+        for (Node node : asList(titleElements)) {
 
-        // TODO: find all elements that are tagged like so:
-//        https://docs.oracle.com/javase/8/docs/api/index.html?org/w3c/dom/package-summary.html
-        // If in OmniGraffle an object, e.g. a rectangle was provided with "Object Data Name": "ID-FOO", then exported. This string is not yet used as object id in the svg representation.
-        // Running this script ensures all id strings set with omnigraffle are then likewise copied for the corresponding object id.
-
-        svg.getElementsByTagName("");
+            // If and only if the value of that node has the OmniGraffle prefix "VID-" (Vector ID)...
+            // ... then add this element value as as actual ID of its parent node
+            if (node.getTextContent().startsWith("VID-")) {
+                ((Element) node.getParentNode()).setAttribute("id", node.getTextContent());
+                // Finally get rid of this omnigraffle artefact, we don't need it ever again.
+                node.getParentNode().removeChild(node);
+            }
+        }
         return svg;
     }
 }

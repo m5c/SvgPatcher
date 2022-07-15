@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="125.3 193.4 211.2 211.5" width="211.2" height="211.5">
+  <defs>
+    <font-face font-family="Helvetica Neue" font-size="16" panose-1="2 0 5 3 0 0 0 2 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="951.9958" descent="-212.99744" font-weight="400">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.18.5\n2022-06-18 13:02:22 +0000</metadata>
+  <g id="Canvas_1" stroke-opacity="1" fill="none" fill-opacity="1" stroke="none" stroke-dasharray="none">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_3">
+        <title>VID-SQUARE1</title>
+        <rect x="230.8" y="193.9" width="105" height="105" fill="#40ff40"/>
+        <rect x="230.8" y="193.9" width="105" height="105" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(235.8 237.176)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="34.156" y="15">361</tspan>
+        </text>
+      </g>
+      <g id="Graphic_8">
+        <title>VID-CIRCLE</title>
+        <circle cx="178.4" cy="351.8" r="52.6000831123552" fill="#ccc"/>
+        <circle cx="178.4" cy="351.8" r="52.6000831123552" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(141.32 342.576)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="32.783998" y="15">:)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_13">
+        <title>VID-DIAMOND</title>
+        <path d="M 179.09328 194.1 L 230.8 245.80672 L 177.70672 298.9 L 126 247.19328 Z" fill="red"/>
+        <path d="M 179.09328 194.1 L 230.8 245.80672 L 177.70672 298.9 L 126 247.19328 Z" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_14">
+        <title>VID-SQUARE2</title>
+        <rect x="231" y="298.9" width="105" height="105" fill="#4040ff"/>
+        <rect x="231" y="298.9" width="105" height="105" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(236 342.176)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="34.756" y="15">Yay</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

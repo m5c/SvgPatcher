@@ -24,7 +24,7 @@ In addition to that the program patches the default svg dimensions to somethign 
   * Compile the program once with:  
   ```mvn clean package```
   * Then call it from wherever you need it:  
-  ```java -jar target/svgpatcher.jar path/to/input.svg path/to/output.svg```
+  ```java -Djavax.xml.accessExternalDTD=all -jar target/svgpatcher.jar vectorBoard.svg generatedVectorBoard.svg```
 
 ## How it works:
 

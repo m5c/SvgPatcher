@@ -13,6 +13,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
         <source>8</source>
+        <main.class>eu.kartoffelquadrat.svgpatcher.SvgPatcher</main.class>
     </properties>
 
     <dependencies>
@@ -35,7 +36,21 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>eu.kartoffelquadrat.svgpatcher.SvgPatcher</mainClass>
+                    <mainClass>${main.class}</mainClass>
+                </configuration>
+            </plugin>
+
+            <!-- specify main class for JAR manifest-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>${main.class}</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

@@ -17,7 +17,7 @@ import java.io.IOException;
 public class SvgPatcher {
 
     // Set path to this programs own pom.xml file.
-    private static final String SOURCE_FILE_1 = "pom.xml";
+    private static final String SOURCE_FILE_1 = "vectorBoard.svg";
 
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, TransformerException {
 

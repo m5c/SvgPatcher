@@ -10,6 +10,8 @@ Input files and handling have been adapted for the purpose of ```pom.xml```handl
 ## How to run
 
  * ```cd``` into project.
+ * Once, add this VM argument as maven default (Allows dynamic loading of xml doctype definitions. This is required to parse the provided svg file.):  
+ ```export MAVEN_OPTS="-Djavax.xml.accessExternalDTD=all"```
  * Start the software (make sure ```pom.xml``` is at call location)  
 ```mvn clean package exec:run```
 

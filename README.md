@@ -30,7 +30,7 @@ In addition to that the program patches the default svg dimensions to something 
 ## How it works
 
 Suppose you have tagged an element in Omnigraffle like so:  
-![omnigraffel.png](markdown/omnigraffle.png)
+![omnigraffle.png](markdown/omnigraffle.png)
 
 You can export it to an svg file, but unfortunately you still need a mechanism to store the ID you typed in the corresponding DOM id attributes:
 ![omnigraffel.png](markdown/export.png)

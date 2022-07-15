@@ -17,8 +17,8 @@ public class DimensionPatcher {
 
         printAllChildNodes(svg);
 
-        svg.getElementsByTagName("svg");
-        NamedNodeMap attributes = svg.getAttributes();
+        NodeList svgElementList = svg.getElementsByTagName("svg");
+        NamedNodeMap attributes = svgElementList.item(0).getAttributes();
         attributes.getNamedItem("width").setNodeValue("5000");
         attributes.getNamedItem("height").setNodeValue("5000");
         return svg;

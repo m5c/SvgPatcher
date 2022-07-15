@@ -6,7 +6,7 @@ Minimal DOM transformer that patches SVG files exported by OmniGraffle.
 
 Building user interfaces with a vector program like OmniGraffle is fun. Yet if your interface is more than static you will need DOM manipulations. Unfortunatley this also means you need a reliable way to target indidiual nodes in your SVG DOM tree. Omnigraffle allows setting IDs, but for whatever reason the programmers decided to disregard the existing way of identifying svg elements (using the ```id``` tag). Instead omnigraffle adds a child node named ```title```.
 This little program patches SVG files, so the set IDs are where they are supposed to be, *in the node's ```id``` attribute.*  
-In addition to that the program patches the default svg dimensions to somethign so gigantic (5000x5000) that whatever browser using this graphic is forced to apply the css scaling rules you may have enabled.
+In addition to that the program patches the default svg dimensions to something so gigantic (5000x5000) that whatever browser using this graphic is forced to apply the css scaling rules you may have enabled.
 
 ## How to run
 
@@ -26,24 +26,19 @@ In addition to that the program patches the default svg dimensions to somethign 
   * Then call it from wherever you need it:  
   ```java -Djavax.xml.accessExternalDTD=all -jar target/svgpatcher.jar vectorBoard.svg generatedVectorBoard.svg```
 
-## How it works:
+## How it works
 
-### SVG Dimensions
+Suppose you have tagged an element in Omnigraffle like so:  
+![omnigraffel.png](markdown/omnigraffle.png)
 
-Changes this line:  
-```xml
-<svg [...] width="211.2" height="211.5">
-```
+You can export it to an svg file, but unfortunately you still need a mechanism to store the ID you typed in the corresponding DOM id attributes:
+![omnigraffel.png](markdown/export.png)
 
-To:  
-```xml
-<svg [...] width="5000" height="5000">
-```
-
+Otherwise the IDs you set are in the target file, but not where you want them... 
 
 ### SVG IDs
 
-Changes these patterns:  
+Calling this program changes all these patterns:  
 ```xml
       <g id="Graphic_3">
         <title>VID-SQUARE1</title>
@@ -55,7 +50,7 @@ Changes these patterns:
       </g>
 ```
 
-To:  
+to:  
 ```xml
       <g id="VID_SQUARE1">
         <rect x="230.8" y="193.9" width="105" height="105" fill="#40ff40"/>
@@ -65,6 +60,19 @@ To:
         </text>
       </g>
 ```
+
+### SVG Dimensions
+
+In addition it boosts the svg dimensions to something gigantic:
+```xml
+<svg [...] width="211.2" height="211.5">
+```
+
+is changed to:  
+```xml
+<svg [...] width="5000" height="5000">
+```
+
 
 ## Dependencies
 

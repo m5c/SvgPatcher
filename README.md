@@ -11,12 +11,13 @@ In addition to that the program patches the default svg dimensions to somethign 
 ## How to run
 
  * ```cd``` into project.
- * replace ```vectorBoard.svg``` by the svg generated with Omnigraffle.
+ * replace ```vectorBoard.svg``` by the svg generated with OmniGraffle.
  * Once, add this VM argument as maven default (Allows dynamic loading of xml doctype definitions. This is required to parse the provided svg file.):  
  ```export MAVEN_OPTS="-Djavax.xml.accessExternalDTD=all"```
  * Start the software (make sure ```pom.xml``` is at call location)  
-```mvn clean package exec:run```
- * The patched svg lies in tmp: ```/tmp/patchedVectorBoard.svg```
+ Replace the ```vectorBoard.svg``` argument by your input svg file.
+```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg"```
+ * The patched svg is stored at: ```patchedVectorBoard.svg```
 
 ## How it works:
 

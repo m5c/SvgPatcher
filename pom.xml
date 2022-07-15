@@ -19,6 +19,8 @@
     </dependencies>
 
     <build>
+        <finalName>svgpatcher</finalName>
+
         <plugins>
             <!-- specify main class for exec goal -->
             <plugin>

@@ -18,6 +18,13 @@ In addition to that the program patches the default svg dimensions to somethign 
  Replace the ```vectorBoard.svg``` argument by your input svg file.
 ```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg"```
  * The patched svg is stored at: ```patchedVectorBoard.svg```
+ 
+ OR
+ 
+  * Compile the program once with:  
+  ```mvn clean package```
+  * Then call it from wherever you need it:  
+  ```java -jar target/svgpatcher.jar path/to/input.svg path/to/output.svg```
 
 ## How it works:
 

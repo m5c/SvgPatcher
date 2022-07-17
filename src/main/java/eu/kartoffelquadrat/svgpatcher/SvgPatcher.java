@@ -8,6 +8,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Code based on the example by mkyong: https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
@@ -20,7 +23,10 @@ public class SvgPatcher {
      * and adapts these id values as actual svg ids, so browser javascript frameworks can actually find them and
      * conveniently modify the DOM.
      *
-     * @param args
+     * @param args first argument in input file to parse, second argument is where to store the target file, all further
+     *             arguments are references to javascript functions that must be included by the svg. (Place those
+     *             javascript files in your .../resources/static/ folder, then reference to them using your applications
+     *             base url, e.g.: /baseurl/uiactions.js)
      * @throws IOException
      * @throws SAXException
      * @throws ParserConfigurationException
@@ -36,6 +42,13 @@ public class SvgPatcher {
 
         // Patch meta width and height, so css renderer is not confused by overly small svg graphics.
         DimensionPatcher.patchSvgDimensions(svg);
+
+        // Add reference to a relative javascript file that defines functions for onclick actions.
+        List<String> externalFunctions = new LinkedList<>(Arrays.asList(args));
+        // remove first to elements
+        externalFunctions.remove(0);
+        externalFunctions.remove(0);
+        FunctionReferencePatcher.referenceFunctions(svg, externalFunctions);
 
         // Delete file if already exists (so it is actually replaced)
         File file = new File(args[1]);

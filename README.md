@@ -16,8 +16,9 @@ In addition to that the program patches the default svg dimensions to something 
  * Once, add this VM argument as maven default (Allows dynamic loading of xml doctype definitions. This is required to parse the provided svg file.):  
  ```export MAVEN_OPTS="-Djavax.xml.accessExternalDTD=all"```
  * Start the software (make sure ```pom.xml``` is at call location)  
- Replace the ```vectorBoard.svg``` argument by your input svg file.
-```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg"```
+ Replace the ```vectorBoard.svg``` argument by your input svg file.  
+ Replace the ```baseurl/scriptX.js``` arguments by as many scripts as you need. (Can also be none, but usually you want to reference some function that get triggered by onclick handlers.)
+```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg baseurl/script1.js baseurl/script2.js"```
  * The patched svg is stored at: ```patchedVectorBoard.svg```
  
  OR

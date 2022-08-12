@@ -1,13 +1,15 @@
 # SVG for web-use patcher
 
-Minimal DOM transformer that patches SVG files exported by OmniGraffle.
+Minimal DOM transformer that patches SVG files exported by OmniGraffle. Use this to prep your SVG files for integration in a webapp.
 
 ## About
 
-Building user interfaces with a vector program like OmniGraffle is fun.  
-Yet if your interface is more than static you will need DOM manipulations. Unfortunately this also means you need a reliable way to target individual nodes in your SVG DOM tree. OmniGraffle allows setting IDs, but for whatever reason the programmers decided to disregard the existing way of identifying svg elements (using the ```id``` tag). OmniGraffle only adds a child node named ```title```.
-This little program patches SVG files, so the set IDs are where they are supposed to be, *in the node's ```id``` attribute.*  
-In addition to that the program patches the default svg dimensions to something so gigantic (5000x5000) that whatever browser using this graphic must apply the css scaling rules you may have enabled.
+Like many other, I prefer designing a good game UI in a graphics program rather than with pure HTML and CSS.
+That being said, it is possible to embed exported SVGs into an HTML page, so why not just export a fancy UI from Omnigraffle and display it for a board game implementation?
+
+ * Game UIs change, so this means you will have to modify your UIs DOM tree. To do so you need a reliable way of identifying objects. In WebApps this is done using element IDs. Unfortunately most SVG editors will not let you place element ids. This patchers converts the textual tags (e.g. set my onmigraffle into element IDs.
+ * Game UIs should be centered and optimally use space. This can be done with css, but requires some patching (meta attributes in your css). This patcher automatically sets those.
+ * Game UIs should not have selectable text. This patcher embeds a tiny CSS in your svg that disables manual text selection.
 
 ## How to run
 
@@ -75,6 +77,22 @@ is changed to:
 <svg [...] width="5000" height="5000">
 ```
 
+### No selectable text
+
+Adds these css tags to your svg:  
+```css
+svg text {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+}
+svg text::selection {
+                background: none;
+}
+```
+
+As a result all text in your SVG is no longer manually selectable when displayed in a browser.
 
 ## Dependencies
 

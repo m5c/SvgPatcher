@@ -43,6 +43,9 @@ public class SvgPatcher {
         // Patch meta width and height, so css renderer is not confused by overly small svg graphics.
         DimensionPatcher.patchSvgDimensions(svg);
 
+        // Patch (add) an internal CSS definition that prevents manual text selection on click
+        CssPatcher.patchSvgCss(svg);
+
         // Add reference to a relative javascript file that defines functions for onclick actions.
         List<String> externalFunctions = new LinkedList<>(Arrays.asList(args));
         // remove first to elements

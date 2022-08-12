@@ -11,26 +11,26 @@ That being said, it is possible to embed exported SVGs into an HTML page, so why
  * Game UIs should be centered and optimally use space. This can be done with css, but requires some patching (meta attributes in your css). This patcher automatically sets those.
  * Game UIs should not have selectable text. This patcher embeds a tiny CSS in your svg that disables manual text selection.
 
-## How to run
+## Usage
 
- * ```cd``` into project.
- * replace ```vectorBoard.svg``` by the svg generated with OmniGraffle.
- * Once, add this VM argument as maven default (Allows dynamic loading of xml doctype definitions. This is required to parse the provided svg file.):  
- ```export MAVEN_OPTS="-Djavax.xml.accessExternalDTD=all"```
- * Start the software (make sure ```pom.xml``` is at call location)  
- Replace the ```vectorBoard.svg``` argument by your input svg file.  
- Replace the ```baseurl/scriptX.js``` arguments by as many scripts as you need. (Can also be none, but usually you want to reference some function that get triggered by onclick handlers.)
-```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg baseurl/script1.js baseurl/script2.js"```
- * The patched svg is stored at: ```patchedVectorBoard.svg```
- 
- OR
- 
-  * Compile the program once with:  
-  ```mvn clean package```
-  * Then call it from wherever you need it:  
-  ```java -Djavax.xml.accessExternalDTD=all -jar target/svgpatcher.jar vectorBoard.svg generatedVectorBoard.svg```
+ * Export your SVG with Omnigraffle (see placement of [tag descriptions](#how-it-works))
+ * Launch the patcher:  
+ ```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg /gvg/uiactions.js /foo/baz.js"```  
+ Explanation of arguments:
+      * ```vectorBoard.svg```: Input SVG
+      * ```patchedVectorBoard.svg```: Output SVG
+      * ```/gvg/uiactions.js```: First javascript function to reference
+      * ```/foo/baz.js```: Second javascript function to reference
+ * Use patched SVG (exported to ```patchedVectorBoard.svg```) in webapp.  
+ Sample [```patchedVectorBoard.svg```](patchedVectorBoard.svg), appears in a demo webapp, [here](https://github.com/kartoffelquadrat/GenericVectorGame).
 
-## How it works
+List of applied patches:
+ * [ID Transformation](#svg-ids)
+ * [Dimension Patch](#svg-dimensions)
+ * [JS Function Reference Embed](#functional-reference-patcher)
+ * [CSS No Text Select Embed](#no-selectable-text)
+  
+## Patcher Details
 
 Suppose you have tagged an element in Omnigraffle like so:  
 ![omnigraffle.png](markdown/omnigraffle.png)
@@ -76,6 +76,17 @@ is changed to:
 ```xml
 <svg [...] width="5000" height="5000">
 ```
+
+### Functional Reference Patcher
+
+Adds as many auto-loaded JavaScript function references (you may select the target locations) to your svg.
+Added code is e.g.:  
+```svg
+<script xlink:actuate="onLoad" xlink:href="/gvg/uiactions.js" xlink:show="other" xlink:type="simple"/>
+<script xlink:actuate="onLoad" xlink:href="/foo/baz.js" xlink:show="other" xlink:type="simple"/>
+```
+
+(See [usage section](#usage), for input arguments.)
 
 ### No selectable text
 

@@ -15,12 +15,13 @@ That being said, it is possible to embed exported SVGs into an HTML page, so why
 
  * Export your SVG with Omnigraffle (see placement of [tag descriptions](#how-it-works))
  * Launch the patcher:  
- ```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg /gvg/uiactions.js /foo/baz.js"```  
+ ```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg /gvg/uiactions.js /foo/baz.js" "-Djavax.xml.accessExternalDTD=all"```  
  Explanation of arguments:
       * ```vectorBoard.svg```: Input SVG
       * ```patchedVectorBoard.svg```: Output SVG
       * ```/gvg/uiactions.js```: First javascript function to reference
       * ```/foo/baz.js```: Second javascript function to reference
+      * ```-Djavax.xml.accessExternalDTD=all```: See [DTD Troubleshoot](#dtd-troubleshoot)
  * Use patched SVG (exported to ```patchedVectorBoard.svg```) in webapp.  
  Sample [```patchedVectorBoard.svg```](patchedVectorBoard.svg), appears in a demo webapp, [here](https://github.com/kartoffelquadrat/GenericVectorGame).
 
@@ -29,6 +30,17 @@ List of applied patches:
  * [Dimension Patch](#svg-dimensions)
  * [JS Function Reference Embed](#functional-reference-patcher)
  * [CSS No Text Select Embed](#no-selectable-text)
+
+### DTD Troubleshoot
+
+The SVG patcher interprets the provided svg as xml file and hence runs a DTD verification. This is by default restricted by the JVM and must be allowed manually.
+
+ * When launched from IDE (IntelliJ): Add this option is in the run configuration: ```Runner``` -> ```VM Options``` -> ```"-Djavax.xml.accessExternalDTD=all"```
+ * When launching form command line, provide this runtime JVM argument: e.g.  
+```bash
+mvn clean package exec:java "-Djavax.xml.accessExternalDTD=all" "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg /gvg/uiactions.js /foo/baz.js"
+```  
+(Note: For testing this option is auto enabled and not required. ```mvn clean test``` can be run as is. I was simply not able to auto-default the required JVM options for non-test launches.)
   
 ## Patcher Details
 

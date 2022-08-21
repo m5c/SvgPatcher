@@ -47,12 +47,14 @@ public class IdPatcher {
         NodeList titleElements = svg.getElementsByTagName("title");
         for (Node node : asList(titleElements)) {
 
+            // TODO: figure out why this does not patch cirlce and Rectangle2. => Modfying while iterating, only every second elemtn?
             // If and only if the value of that node has the OmniGraffle prefix "VID-" (Vector ID)...
             // ... then add this element value as as actual ID of its parent node
             if (node.getTextContent().startsWith("VID-")) {
                 ((Element) node.getParentNode()).setAttribute("id", node.getTextContent());
                 // Finally get rid of this omnigraffle artefact, we don't need it ever again.
                 node.getParentNode().removeChild(node);
+                System.out.println("Patched one element: "+node.getTextContent());
             }
         }
         return svg;

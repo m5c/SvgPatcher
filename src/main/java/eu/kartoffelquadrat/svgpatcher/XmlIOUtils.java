@@ -17,8 +17,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * Util class to handle import of xml filed from disk.
- * Based on this tutorial: https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
+ * Util class to handle import of xml filed from disk. Based on this tutorial: https://mkyong.com/java/how-to-read-xml-file-in-java-dom-parser/
  */
 public class XmlIOUtils {
 
@@ -27,6 +26,9 @@ public class XmlIOUtils {
      *
      * @param fileLocation as the location of the target xml file on disk.
      * @return document object representing the in-ram tree structure of the parsed file.
+     * @throws ParserConfigurationException in case the provided parser arguments cannot be applied.
+     * @throws IOException                  in case the provided input file location cannot be accessed.
+     * @throws SAXException                 in case the provided svg file cannot be parsed.
      */
     public static Document parseXmlToDocument(String fileLocation) throws ParserConfigurationException, IOException, SAXException {
 
@@ -50,8 +52,10 @@ public class XmlIOUtils {
     /**
      * Based on this tutorial: https://www.baeldung.com/java-write-xml-document-file
      *
-     * @param xmlDocument the in-memory xml tree.
+     * @param xmlDocument  the in-memory xml tree.
      * @param fileLocation the file location on disk as string.
+     * @throws TransformerException in case the modified file cannot be persisted to disk
+     * @throws IOException          in case the modified file cannot be persisted to disk
      */
     public static void writeXmlDocumentToDisk(Document xmlDocument, String fileLocation) throws TransformerException, IOException {
 

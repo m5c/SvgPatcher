@@ -41,6 +41,7 @@ public class IdPatcher {
      * This method handles this transformation for an entire svg document.
      *
      * @param svg the raw svg document object
+     * @return the same svg object as provided as input, internally patched.
      */
     public static Document patchAllOmnigraffleIds(Document svg) {
 

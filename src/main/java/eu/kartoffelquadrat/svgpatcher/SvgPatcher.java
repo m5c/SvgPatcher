@@ -27,10 +27,10 @@ public class SvgPatcher {
      *             arguments are references to javascript functions that must be included by the svg. (Place those
      *             javascript files in your .../resources/static/ folder, then reference to them using your applications
      *             base url, e.g.: /baseurl/uiactions.js)
-     * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
-     * @throws TransformerException
+     * @throws IOException in case provided file can not be read
+     * @throws SAXException in case provided file can not be interpreted as svg / does not comply to DTD
+     * @throws ParserConfigurationException in case the parser arguments cannot be applied
+     * @throws TransformerException in case the modified svg cannot be persisted to disk
      */
     public static void main(String[] args) throws IOException, SAXException, ParserConfigurationException, TransformerException {
 

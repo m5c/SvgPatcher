@@ -13,7 +13,14 @@ import static eu.kartoffelquadrat.svgpatcher.XmlNodelistIteratorTools.asList;
 /**
  * Maximilian Schiedermeier 2022
  */
-public class IdPatcher {
+public class IdPatcher extends Patcher {
+
+    /**
+     * @param svg the raw svg document object
+     */
+    public IdPatcher(Document svg) {
+        super(svg);
+    }
 
     /**
      * This method does the actual DOM transformation we are intested in. If in Omnigraffle an object is marked with
@@ -31,16 +38,14 @@ public class IdPatcher {
      * font-size="16" font-weight="400" fill="black" x="34.156" y="15" 361/tspan /text /g p This method handles this
      * transformation for an entire svg document.
      *
-     * @param svg the raw svg document object
      * @return the same svg object as provided as input, internally patched.
      */
-    public static Document patchAllOmnigraffleIds(Document svg) {
-
+    @Override
+    public Document execute() {
         NodeList titleElements = svg.getElementsByTagName("title");
         List<Node> stagedForRemoval = new LinkedList<>();
         for (Node node : asList(titleElements)) {
 
-            // TODO: figure out why this does not patch circle and Rectangle2. => Modifying while iterating, only every second element?
             // If and only if the value of that node has the OmniGraffle prefix "VID-" (Vector ID)...
             // ... then add this element value as as actual ID of its parent node
             if (node.getTextContent().startsWith("VID-")) {
@@ -52,7 +57,7 @@ public class IdPatcher {
         }
 
         // Now that iteration over original document tree is finished, remove the obsolete elements.
-        for (Node obsoleteNode:stagedForRemoval) {
+        for (Node obsoleteNode : stagedForRemoval) {
             obsoleteNode.getParentNode().removeChild(obsoleteNode);
         }
 

@@ -12,7 +12,7 @@ import org.w3c.dom.NodeList;
  *
  * @author Maximilian Schiedermeier, 2022s
  */
-public class CssPatcher {
+public class CssPatcher extends Patcher {
 
     private static final String CSS_NO_TEXT_SELECT_DEFINITION =
             "        svg text {\n" +
@@ -25,14 +25,17 @@ public class CssPatcher {
                     "                background: none;\n" +
                     "                }\n";
 
+    public CssPatcher(Document svg) {
+        super(svg);
+    }
+
     /**
      * Adds a new child node to the root svg node: "style".
      *
-     * @param svg as the parsed csv file the novel node shall be added to.
      * @return the identical svg object you passed as input, but with patched style node.
      */
-    public static Document patchSvgCss(Document svg) {
-
+    @Override
+    public Document execute() {
         // Prepare a new node with the CSS definitions:
         Node cssDefNode = svg.createElement("style");
         cssDefNode.setTextContent(CSS_NO_TEXT_SELECT_DEFINITION);

@@ -49,7 +49,7 @@ public class SvGPatcherTest {
         Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
         // Patch all IDs. This is the transformation we want to test
-        IdPatcher.patchAllOmnigraffleIds(svg);
+        new IdPatcher(svg).execute();
 
         // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
         exportAndCompareToExpected(svg, TEST_IDPATCHED_OUTPUT_LOCATION, TEST_IDPATCHED_REFERENCE_LOCATION);
@@ -63,7 +63,7 @@ public class SvGPatcherTest {
         Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
         // Patch all IDs. This is the transformation we want to test
-        CssPatcher.patchSvgCss(svg);
+        new CssPatcher(svg).execute();
 
         // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
         exportAndCompareToExpected(svg, TEST_CSSPATCHED_OUTPUT_LOCATION, TEST_CSSPATCHED_REFERENCE_LOCATION);
@@ -77,7 +77,7 @@ public class SvGPatcherTest {
         Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
         // Patch all IDs. This is the transformation we want to test
-        DimensionPatcher.patchSvgDimensions(svg);
+        new DimensionPatcher(svg).execute();
 
         // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
         exportAndCompareToExpected(svg, TEST_DIMENSIONPATCHED_OUTPUT_LOCATION, TEST_DIMENSIONPATCHED_REFERENCE_LOCATION);
@@ -94,7 +94,7 @@ public class SvGPatcherTest {
         sampleFunctionFiles.add("/sampleBaseUlr/moreFunctionsBundle.js");
 
         // Patch all IDs. This is the transformation we want to test
-        FunctionReferencePatcher.referenceFunctions(svg, sampleFunctionFiles);
+        new FunctionReferencePatcher(svg, sampleFunctionFiles).execute();
 
         // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
         exportAndCompareToExpected(svg, TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION, TEST_FUNCTINOSPATCHED_REFERENCE_LOCATION);

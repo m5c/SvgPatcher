@@ -38,20 +38,20 @@ public class SvgPatcher {
         Document svg = XmlIOUtils.parseXmlToDocument(args[0]);
 
         // Patch all IDs
-        IdPatcher.patchAllOmnigraffleIds(svg);
+        new IdPatcher(svg).execute();
 
         // Patch meta width and height, so css renderer is not confused by overly small svg graphics.
-        DimensionPatcher.patchSvgDimensions(svg);
+        new DimensionPatcher(svg).execute();
 
         // Patch (add) an internal CSS definition that prevents manual text selection on click
-        CssPatcher.patchSvgCss(svg);
+        new CssPatcher(svg).execute();
 
         // Add reference to a relative javascript file that defines functions for onclick actions.
         List<String> externalFunctions = new LinkedList<>(Arrays.asList(args));
-        // remove first to elements
+        // remove first two elements
         externalFunctions.remove(0);
         externalFunctions.remove(0);
-        FunctionReferencePatcher.referenceFunctions(svg, externalFunctions);
+        new FunctionReferencePatcher(svg, externalFunctions).execute();
 
         // Delete file if already exists (so it is actually replaced)
         File file = new File(args[1]);

@@ -10,8 +10,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
         <source>8</source>
         <main.class>eu.kartoffelquadrat.svgpatcher.SvgPatcher</main.class>
         <jvm.options>-Djavax.xml.accessExternalDTD=all</jvm.options>
@@ -38,6 +38,9 @@
     </licenses>
 
     <dependencies>
+
+
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

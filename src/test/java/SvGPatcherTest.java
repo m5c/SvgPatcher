@@ -1,7 +1,4 @@
-import eu.kartoffelquadrat.svgpatcher.CssPatcher;
-import eu.kartoffelquadrat.svgpatcher.DimensionPatcher;
-import eu.kartoffelquadrat.svgpatcher.IdPatcher;
-import eu.kartoffelquadrat.svgpatcher.XmlIOUtils;
+import eu.kartoffelquadrat.svgpatcher.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -18,6 +15,8 @@ import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SvGPatcherTest {
@@ -30,6 +29,8 @@ public class SvGPatcherTest {
     public static final File TEST_CSSPATCHED_REFERENCE_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/csspatchedreference.svg");
     public static final File TEST_DIMENSIONPATCHED_OUTPUT_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/dimensionpatched.svg");
     public static final File TEST_DIMENSIONPATCHED_REFERENCE_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/dimensionpatchedreference.svg");
+    public static final File TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/functionspatched.svg");
+    public static final File TEST_FUNCTINOSPATCHED_REFERENCE_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/functionspatchedreference.svg");
 
 
     /**
@@ -58,7 +59,7 @@ public class SvGPatcherTest {
      * Test if the string (not persisted to disk) when sample svg is only css patched complies to what we expect.
      */
     @Test
-    public void testCssPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException, NoSuchAlgorithmException {
+    public void testCssPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException {
         Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
         // Patch all IDs. This is the transformation we want to test
@@ -72,7 +73,7 @@ public class SvGPatcherTest {
      * Test if the string (not persisted to disk) when sample svg is only dimension patched complies to what we expect.
      */
     @Test
-    public void testDimensionPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException, NoSuchAlgorithmException {
+    public void testDimensionPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException {
         Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
         // Patch all IDs. This is the transformation we want to test
@@ -80,6 +81,23 @@ public class SvGPatcherTest {
 
         // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
         exportAndCompareToExpected(svg, TEST_DIMENSIONPATCHED_OUTPUT_LOCATION, TEST_DIMENSIONPATCHED_REFERENCE_LOCATION);
+    }
+
+    /**
+     * Test if the string (not persisted to disk) when sample svg is only js function refs patched complies to what we expect.
+     */
+    @Test
+    public void testFunctionPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException {
+        Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
+        List<String> sampleFunctionFiles = new LinkedList<>();
+        sampleFunctionFiles.add("/sampleBaseUlr/myFunnyFunctionBundle.js");
+        sampleFunctionFiles.add("/sampleBaseUlr/moreFunctionsBundle.js");
+
+        // Patch all IDs. This is the transformation we want to test
+        FunctionReferencePatcher.referenceFunctions(svg, sampleFunctionFiles);
+
+        // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
+        exportAndCompareToExpected(svg, TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION, TEST_FUNCTINOSPATCHED_REFERENCE_LOCATION);
     }
 
     /**

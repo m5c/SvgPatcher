@@ -1,4 +1,5 @@
 import eu.kartoffelquadrat.svgpatcher.CssPatcher;
+import eu.kartoffelquadrat.svgpatcher.DimensionPatcher;
 import eu.kartoffelquadrat.svgpatcher.IdPatcher;
 import eu.kartoffelquadrat.svgpatcher.XmlIOUtils;
 import org.junit.Assert;
@@ -27,6 +28,8 @@ public class SvGPatcherTest {
     public static final File TEST_IDPATCHED_REFERENCE_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/idpatchedreference.svg");
     public static final File TEST_CSSPATCHED_OUTPUT_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/csspatched.svg");
     public static final File TEST_CSSPATCHED_REFERENCE_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/csspatchedreference.svg");
+    public static final File TEST_DIMENSIONPATCHED_OUTPUT_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/dimensionpatched.svg");
+    public static final File TEST_DIMENSIONPATCHED_REFERENCE_LOCATION = new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/dimensionpatchedreference.svg");
 
 
     /**
@@ -52,7 +55,7 @@ public class SvGPatcherTest {
     }
 
     /**
-     * Test if the string (not persisted to disk) when sample svg is only ID patched complies to what we expect.
+     * Test if the string (not persisted to disk) when sample svg is only css patched complies to what we expect.
      */
     @Test
     public void testCssPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException, NoSuchAlgorithmException {
@@ -63,6 +66,20 @@ public class SvGPatcherTest {
 
         // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
         exportAndCompareToExpected(svg, TEST_CSSPATCHED_OUTPUT_LOCATION, TEST_CSSPATCHED_REFERENCE_LOCATION);
+    }
+
+    /**
+     * Test if the string (not persisted to disk) when sample svg is only dimension patched complies to what we expect.
+     */
+    @Test
+    public void testDimensionPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException, NoSuchAlgorithmException {
+        Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
+
+        // Patch all IDs. This is the transformation we want to test
+        DimensionPatcher.patchSvgDimensions(svg);
+
+        // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
+        exportAndCompareToExpected(svg, TEST_DIMENSIONPATCHED_OUTPUT_LOCATION, TEST_DIMENSIONPATCHED_REFERENCE_LOCATION);
     }
 
     /**

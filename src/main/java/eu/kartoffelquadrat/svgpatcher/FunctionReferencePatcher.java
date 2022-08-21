@@ -10,6 +10,12 @@ import java.util.List;
  * Helper class that adds additional script referencer tags as main nodes (one level below root)
  */
 public class FunctionReferencePatcher {
+
+    /**
+     * Patches provided svg object with reference to prepared javascript function names.
+     * @param svg as the parsed svg file, the object you want to patch.
+     * @param externalFunctions as a list of functions you want to be able to invoke from your svg.
+     */
     public static void referenceFunctions(Document svg, List<String> externalFunctions) {
 
         // This is the element we want to add the script references to (as children)

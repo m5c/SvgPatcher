@@ -28,8 +28,8 @@ public class CssPatcher {
     /**
      * Adds a new child node to the root svg node: "style".
      *
-     * @param svg
-     * @return
+     * @param svg as the parsed csv file the novel node shall be added to.
+     * @return the identical svg object you passed as input, but with patched style node.
      */
     public static Document patchSvgCss(Document svg) {
 

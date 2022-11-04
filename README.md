@@ -121,6 +121,10 @@ As a result all text in your SVG is no longer manually selectable when displayed
 
 None, this is all built-in Java functionality  :)
 
+## Documentation
+
+[API Doc on Github Pages](https://kartoffelquadrat.github.io/SvgPatcher/)
+
 ## Contact / Pull Requests
 
  * Author: Maximilian Schiedermeier ![email](markdown/email.png)

@@ -13,7 +13,7 @@ That being said, it is possible to embed exported SVGs into an HTML page, so why
 
 ## Usage
 
- * Export your SVG with Omnigraffle (see placement of [tag descriptions](#how-it-works))
+ * Export your SVG with Omnigraffle (see placement of [tag descriptions](#patcher-details))
  * Launch the patcher:  
  ```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg /gvg/uiactions.js /foo/baz.js" "-Djavax.xml.accessExternalDTD=all"```  
  Explanation of arguments:

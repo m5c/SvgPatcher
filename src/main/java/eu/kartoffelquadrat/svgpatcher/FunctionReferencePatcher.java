@@ -16,7 +16,7 @@ public class FunctionReferencePatcher extends Patcher {
    * Constructor for Function Reference Patcher utility class.
    *
    * @param externalFunctions as a list of functions you want to be able to invoke from your svg.
-   * @parasm svg               as the parsed svg file, the object you want to patch.
+   * @param svg               as the parsed svg file, the object you want to patch.
    */
   public FunctionReferencePatcher(Document svg, List<String> externalFunctions) {
     super(svg);

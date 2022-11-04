@@ -11,23 +11,27 @@ import org.w3c.dom.NodeList;
  */
 public class DimensionPatcher extends Patcher {
 
-    /**
-     * @param svg the raw svg document object
-     */
-    public DimensionPatcher(Document svg) {
-        super(svg);
-    }
+  /**
+   * Dimension Patcher constructor. Creates a utility object that boosts dimensions of provided
+   * SVG.
+   *
+   * @param svg the raw svg document object
+   */
+  public DimensionPatcher(Document svg) {
+    super(svg);
+  }
 
-    /**
-     * Changes the SVG dimensions so any browser considers it big enough to trigger css resize.
-     *
-     * @return the patched svg document object
-     */
-    @Override
-    public Document execute() {
-        NodeList svgElementList = svg.getElementsByTagName("svg");
-        NamedNodeMap attributes = svgElementList.item(0).getAttributes();
-        attributes.getNamedItem("width").setNodeValue("5000");
-        attributes.getNamedItem("height").setNodeValue("5000");
-        return svg;    }
+  /**
+   * Changes the SVG dimensions so any browser considers it big enough to trigger css resize.
+   *
+   * @return the patched svg document object
+   */
+  @Override
+  public Document execute() {
+    NodeList svgElementList = svg.getElementsByTagName("svg");
+    NamedNodeMap attributes = svgElementList.item(0).getAttributes();
+    attributes.getNamedItem("width").setNodeValue("5000");
+    attributes.getNamedItem("height").setNodeValue("5000");
+    return svg;
+  }
 }

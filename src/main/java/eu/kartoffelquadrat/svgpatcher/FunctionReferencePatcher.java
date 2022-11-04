@@ -1,52 +1,53 @@
 package eu.kartoffelquadrat.svgpatcher;
 
+import java.util.List;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import java.util.List;
-
 /**
- * Helper class that adds additional script referencer tags as main nodes (one level below root)
+ * Helper class that adds additional script referencer tags as main nodes (one level below root).
  */
 public class FunctionReferencePatcher extends Patcher {
 
-    List<String> externalFunctions;
+  List<String> externalFunctions;
 
-    /**
-     * @parasm svg               as the parsed svg file, the object you want to patch.
-     * @param externalFunctions as a list of functions you want to be able to invoke from your svg.
-     */
-    public FunctionReferencePatcher(Document svg, List<String> externalFunctions) {
-        super(svg);
-        this.externalFunctions = externalFunctions;
+  /**
+   * Constructor for Function Reference Patcher utility class.
+   *
+   * @param externalFunctions as a list of functions you want to be able to invoke from your svg.
+   * @parasm svg               as the parsed svg file, the object you want to patch.
+   */
+  public FunctionReferencePatcher(Document svg, List<String> externalFunctions) {
+    super(svg);
+    this.externalFunctions = externalFunctions;
+  }
+
+  /**
+   * Patches provided svg object with reference to prepared javascript function names.
+   */
+  @Override
+  public Document execute() {
+
+    // This is the element we want to add the script references to (as children)
+    Node root = svg.getDocumentElement();
+
+    for (String scriptLocation : externalFunctions) {
+      System.out.println("Adding script ref to this location: " + scriptLocation);
+
+      // Create new script element:
+      // Something like: <script xlink:href="/gvg/uiactions.js" />
+      Element scriptReference = svg.createElement("script");
+      scriptReference.setAttribute("xlink:href", scriptLocation);
+
+      // Remove default attributes we do not need: (For some reason these lines have no effect)
+      //            scriptReference.removeAttribute("xlink:actuate");
+      //            scriptReference.removeAttribute("xlink:show");
+      //            scriptReference.removeAttribute("xlink:type");
+
+      // Actually add the element to the svg document
+      root.appendChild(scriptReference);
     }
-
-    /**
-     * Patches provided svg object with reference to prepared javascript function names.
-     */
-    @Override
-    public Document execute() {
-
-        // This is the element we want to add the script references to (as children)
-        Node root = svg.getDocumentElement();
-
-        for (String scriptLocation : externalFunctions) {
-            System.out.println("Adding script ref to this location: " + scriptLocation);
-
-            // Create new script element:
-            // Something like: <script xlink:href="/gvg/uiactions.js" />
-            Element scriptReference = svg.createElement("script");
-            scriptReference.setAttribute("xlink:href", scriptLocation);
-
-            // Remove default attributes we do not need: (For some reason these lines have no effect)
-//            scriptReference.removeAttribute("xlink:actuate");
-//            scriptReference.removeAttribute("xlink:show");
-//            scriptReference.removeAttribute("xlink:type");
-
-            // Actually add the element to the svg document
-            root.appendChild(scriptReference);
-        }
-        return svg;
-    }
+    return svg;
+  }
 }

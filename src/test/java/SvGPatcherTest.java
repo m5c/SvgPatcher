@@ -7,14 +7,6 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.security.DigestInputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -38,7 +30,7 @@ public class SvGPatcherTest {
      */
     @Test
     public void testLoadFromTestResources() throws IOException, SAXException, ParserConfigurationException {
-        Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
+        Document svg = XmlInputOutputUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
     }
 
     /**
@@ -46,7 +38,7 @@ public class SvGPatcherTest {
      */
     @Test
     public void testIdPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException {
-        Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
+        Document svg = XmlInputOutputUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
         // Patch all IDs. This is the transformation we want to test
         new IdPatcher(svg).execute();
@@ -60,7 +52,7 @@ public class SvGPatcherTest {
      */
     @Test
     public void testCssPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException {
-        Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
+        Document svg = XmlInputOutputUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
         // Patch all IDs. This is the transformation we want to test
         new CssPatcher(svg).execute();
@@ -74,7 +66,7 @@ public class SvGPatcherTest {
      */
     @Test
     public void testDimensionPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException {
-        Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
+        Document svg = XmlInputOutputUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
         // Patch all IDs. This is the transformation we want to test
         new DimensionPatcher(svg).execute();
@@ -88,7 +80,7 @@ public class SvGPatcherTest {
      */
     @Test
     public void testFunctionPatch() throws IOException, SAXException, ParserConfigurationException, TransformerException {
-        Document svg = XmlIOUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
+        Document svg = XmlInputOutputUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
         List<String> sampleFunctionFiles = new LinkedList<>();
         sampleFunctionFiles.add("/sampleBaseUlr/myFunnyFunctionBundle.js");
         sampleFunctionFiles.add("/sampleBaseUlr/moreFunctionsBundle.js");
@@ -115,7 +107,7 @@ public class SvGPatcherTest {
             legacyExportFile.delete();
 
         // Write the outcome to disk
-        XmlIOUtils.writeXmlDocumentToDisk(svg, output.getAbsolutePath());
+        XmlInputOutputUtils.writeXmlDocumentToDisk(svg, output.getAbsolutePath());
 
         // Verify this corresponds to the expected outcome
         String generatedContent = new Scanner(output).useDelimiter("\\Z").next();

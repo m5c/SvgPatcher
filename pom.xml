@@ -74,7 +74,7 @@
                     <rulesets>
                         <!-- full list: bestpractices, codestyle, design, documentation, errorprone, multithreading, performance-->
                         <ruleset>/category/java/bestpractices.xml</ruleset>
-                        <ruleset>/category/java/codestyle.xml</ruleset>
+<!--                        <ruleset>/category/java/codestyle.xml</ruleset>-->
                     </rulesets>
                     <!-- failOnViolation is actually true by default, but can be disabled -->
                     <failOnViolation>true</failOnViolation>

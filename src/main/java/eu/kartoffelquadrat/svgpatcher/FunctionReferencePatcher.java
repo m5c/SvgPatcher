@@ -1,14 +1,19 @@
 package eu.kartoffelquadrat.svgpatcher;
 
 import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
 
 /**
  * Helper class that adds additional script referencer tags as main nodes (one level below root).
  */
 public class FunctionReferencePatcher extends Patcher {
+
+  private static final Logger logger = LogManager.getLogger(FunctionReferencePatcher.class);
 
   List<String> externalFunctions;
 
@@ -33,7 +38,9 @@ public class FunctionReferencePatcher extends Patcher {
     Node root = svg.getDocumentElement();
 
     for (String scriptLocation : externalFunctions) {
-      System.out.println("Adding script ref to this location: " + scriptLocation);
+      if (logger.isInfoEnabled()) {
+        logger.info("Adding script ref to this location: " + scriptLocation);
+      }
 
       // Create new script element:
       // Something like: <script xlink:href="/gvg/uiactions.js" />

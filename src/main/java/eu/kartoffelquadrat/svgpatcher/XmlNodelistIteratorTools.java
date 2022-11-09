@@ -37,10 +37,12 @@ public final class XmlNodelistIteratorTools {
       list = l;
     }
 
+    @Override
     public Node get(int index) {
       return list.item(index);
     }
 
+    @Override
     public int size() {
       return list.getLength();
     }

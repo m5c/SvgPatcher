@@ -57,6 +57,7 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 
@@ -64,27 +65,30 @@
         <finalName>svgpatcher</finalName>
         <plugins>
 
-            <!-- trigger with: mvn clean pmd:check -->
+            <!-- PMD static code analysis -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.13.0</version> <!-- or use version from pluginManagement -->
+                <version>3.13.0</version>
                 <configuration>
                     <rulesets>
-                        <!-- TODO: find list of all default rulesets -->
-                        <ruleset>/rulesets/java/braces.xml</ruleset>
-                        <ruleset>/rulesets/java/naming.xml</ruleset>
+                        <!-- full list: bestpractices, codestyle, design, documentation, errorprone, multithreading, performance-->
+                        <ruleset>/category/java/bestpractices.xml</ruleset>
+                        <ruleset>/category/java/codestyle.xml</ruleset>
                     </rulesets>
                     <!-- failOnViolation is actually true by default, but can be disabled -->
                     <failOnViolation>true</failOnViolation>
                     <!-- printFailingErrors is pretty useful -->
                     <printFailingErrors>true</printFailingErrors>
+                    <linkXRef>false</linkXRef>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>check</goal>
                         </goals>
+                        <!-- Enforce the pmd:check goal is auto-executed during package phase-->
+                        <phase>package</phase>
                     </execution>
                 </executions>
             </plugin>

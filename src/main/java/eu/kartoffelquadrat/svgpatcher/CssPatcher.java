@@ -6,9 +6,9 @@ import org.w3c.dom.NodeList;
 
 /**
  * Little helper class to add an internal css definition to the SVG file that prevents manual
- * selection of any text objects by the user. See: https://gist.github.com/23maverick23/64b3b587c88697558fac
- * (no text select css definitions) And: https://developer.mozilla.org/en-US/docs/Web/SVG/Element/style
- * (svg css embed mechanism)
+ * selection of any text objects by the user. See:
+ * https://gist.github.com/23maverick23/64b3b587c88697558fac (no text select css definitions) And:
+ * https://developer.mozilla.org/en-US/docs/Web/SVG/Element/style (svg css embed mechanism)
  *
  * @author Maximilian Schiedermeier, 2022s
  */
@@ -25,6 +25,12 @@ public class CssPatcher extends Patcher {
           + "                background: none;\n"
           + "                }\n";
 
+
+  /**
+   * CssPatcher constructor. Invokes super patcher constructor.
+   *
+   * @param svg as the document to operate on.
+   */
   public CssPatcher(Document svg) {
     super(svg);
   }

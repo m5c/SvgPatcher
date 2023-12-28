@@ -22,6 +22,12 @@ import org.xml.sax.SAXException;
 public class XmlInputOutputUtils {
 
   /**
+   * Default constructor.
+   */
+  public XmlInputOutputUtils() {
+  }
+
+  /**
    * Helper method to parse a given xml file.
    *
    * @param fileLocation as the location of the target xml file on disk.

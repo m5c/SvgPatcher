@@ -1,0 +1,3 @@
+[//]: # (TODO: figure out why the JS embedding is needed) I think it is because SVG internal actions cannot trigger
+outside JS functions.
+[//]: # (  TODO: figure out if it makes sense to define stub proxies for all elements that have an assigned ID.)

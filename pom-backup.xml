@@ -13,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- Set maven compiler for source target and bootclasspath to 17-->
         <maven.compiler.release>17</maven.compiler.release>
-        <build.name>svgpatcher</build.name>
+        <build.name>kq</build.name>
         <main.class>eu.kartoffelquadrat.svgpatcher.SvgPatcher</main.class>
         <jvm.options>-Djavax.xml.accessExternalDTD=all</jvm.options>
     </properties>
@@ -139,6 +139,10 @@
                 <version>3.4.2</version>
                 <executions>
                     <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
+                    </execution>
+                    <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
@@ -155,6 +159,7 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
+                    <finalName>${build.name}</finalName>
                     <appendAssemblyId>true</appendAssemblyId>
                 </configuration>
             </plugin>
@@ -235,13 +240,12 @@
                             <goal>rename</goal>
                         </goals>
                         <configuration>
-                            <sourceFile>${project.build.directory}/${build.name}-jar-with-dependencies.jar</sourceFile>
-                            <destinationFile>${project.build.directory}/${build.name}.jar</destinationFile>
+                            <sourceFile>${project.build.outputDirectory}/../svgpatcher.jar</sourceFile>
+                            <destinationFile>${project.build.outputDirectory}/../toto.jar</destinationFile>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
     </build>
 </project>

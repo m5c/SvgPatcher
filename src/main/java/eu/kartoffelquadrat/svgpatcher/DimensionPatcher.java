@@ -30,8 +30,8 @@ public class DimensionPatcher extends Patcher {
   public Document execute() {
     NodeList svgElementList = svg.getElementsByTagName("svg");
     NamedNodeMap attributes = svgElementList.item(0).getAttributes();
-    attributes.getNamedItem("width").setNodeValue("5000");
-    attributes.getNamedItem("height").setNodeValue("5000");
+    attributes.getNamedItem("width").setNodeValue("8000");
+    attributes.getNamedItem("height").setNodeValue("6000");
     return svg;
   }
 }

@@ -160,7 +160,7 @@ None, this is all built-in Java functionality  :)
 
 ## Documentation
 
-[API Doc on Github Pages](https://kartoffelquadrat.github.io/SvgPatcher/)
+[API Doc on GitHub Pages](https://kartoffelquadrat.github.io/SvgPatcher/)
 
 ## Contact / Pull Requests
 

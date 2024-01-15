@@ -23,7 +23,9 @@ public class CssPatcher extends Patcher {
           + "                }\n"
           + "                svg text::selection {\n"
           + "                background: none;\n"
-          + "                }\n";
+          + "                }\n"
+          + "                svg { cursor: url('cursor.svg'), auto; }\n"
+          + "                svg { pointer-events: none; }\n";
 
 
   /**

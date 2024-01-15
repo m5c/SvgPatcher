@@ -38,4 +38,6 @@
                 svg text::selection {
                 background: none;
                 }
+                svg { cursor: url('cursor.svg'), auto; }
+                svg { pointer-events: none; }
 </style></svg>

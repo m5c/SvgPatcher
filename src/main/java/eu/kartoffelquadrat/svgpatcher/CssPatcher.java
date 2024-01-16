@@ -24,9 +24,9 @@ public class CssPatcher extends Patcher {
           + "                svg text::selection {\n"
           + "                background: none;\n"
           + "                }\n"
-          + "                svg { cursor: url('cursor.svg'), auto; }\n"
-          + "                svg { pointer-events: none; }\n";
-
+          + "                svg { cursor: url('cursor.svg'), auto; }\n";
+  //          + "                svg { pointer-events: none; }\n";
+  // Removed pointer events line. This does suppress popups, but also breaks all object listeners!
 
   /**
    * CssPatcher constructor. Invokes super patcher constructor.

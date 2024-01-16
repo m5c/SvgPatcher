@@ -11,7 +11,8 @@ import org.w3c.dom.NodeList;
 
 /**
  * ID patcher extension. Utility class to replace Omnigraffle object name tags by node id
- * attributes.
+ * attributes. Replaces all title elements that start with "VID" prefix by proper ID tags. Removes
+ * all remaining title tags, to ensure browser does not display popups on hover.
  *
  * @author Maximilian Schiedermeier 2022
  */
@@ -48,19 +49,20 @@ public class IdPatcher extends Patcher {
   @Override
   public Document execute() {
     NodeList titleElements = svg.getElementsByTagName("title");
+    System.out.println("Found " + titleElements.getLength() + " title elements");
     List<Node> stagedForRemoval = new LinkedList<>();
     for (Node node : asList(titleElements)) {
 
       // If and only if the value of that node has the OmniGraffle prefix "VID-" (Vector ID)...
-      // ... then add this element value as as actual ID of its parent node
+      // ... then add this element value as an actual ID of its parent node
       if (node.getTextContent().startsWith("VID-")) {
         ((Element) node.getParentNode()).setAttribute("id", node.getTextContent());
-        // Finally get rid of this omnigraffle artefact, we don't need it ever again.
-        stagedForRemoval.add(node);
-        // System.out.println("Patched one element: " + node.getTextContent());
       }
+      stagedForRemoval.add(node);
+
     }
 
+    // Now that iteration over original document tree is finished, remove the obsolete elements.
     // Now that iteration over original document tree is finished, remove the obsolete elements.
     for (Node obsoleteNode : stagedForRemoval) {
       obsoleteNode.getParentNode().removeChild(obsoleteNode);

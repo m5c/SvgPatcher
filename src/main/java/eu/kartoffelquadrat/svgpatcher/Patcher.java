@@ -1,5 +1,6 @@
 package eu.kartoffelquadrat.svgpatcher;
 
+import java.io.IOException;
 import org.w3c.dom.Document;
 
 /**
@@ -27,6 +28,7 @@ public abstract class Patcher {
    * incremental changes when executed repeatedly.
    *
    * @return the modified svg document object
+   * @throws IOException if patching involves loading of external files which cannot be resolved.
    */
-  public abstract Document execute();
+  public abstract Document execute() throws IOException;
 }

@@ -5,6 +5,9 @@ import eu.kartoffelquadrat.svgpatcher.IdPatcher;
 import eu.kartoffelquadrat.svgpatcher.XmlInputOutputUtils;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,8 +37,11 @@ public class SvGPatcherTest {
       new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/dimensionpatchedreference.svg");
   public static final File TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION =
       new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/functionspatched.svg");
-  public static final File TEST_FUNCTINOSPATCHED_REFERENCE_LOCATION =
+  public static final File TEST_FUNCTIONSPATCHED_REFERENCE_LOCATION =
       new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/functionspatchedreference.svg");
+
+  public static final File TEST_CSS_PATCHER_FILE_LOCATION =
+      new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/sample-custom-definition.css");
 
 
   /**
@@ -76,11 +82,13 @@ public class SvGPatcherTest {
    */
   @Test
   public void testCssPatch()
-      throws IOException, SAXException, ParserConfigurationException, TransformerException {
+      throws IOException, SAXException, ParserConfigurationException, TransformerException,
+      URISyntaxException {
     Document svg = XmlInputOutputUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
     // Patch all IDs. This is the transformation we want to test
-    new CssPatcher(svg).execute();
+    String sampleFilePath = TEST_CSS_PATCHER_FILE_LOCATION.getAbsolutePath();
+    new CssPatcher(svg, sampleFilePath).execute();
 
     // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
     boolean identical = exportAndCompareToExpected(svg, TEST_CSSPATCHED_OUTPUT_LOCATION,
@@ -131,12 +139,12 @@ public class SvGPatcherTest {
 
     // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
     boolean identical = exportAndCompareToExpected(svg, TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION,
-        TEST_FUNCTINOSPATCHED_REFERENCE_LOCATION);
+        TEST_FUNCTIONSPATCHED_REFERENCE_LOCATION);
     Assert.assertTrue(
         "Generated file with patched ids differs from expected output. Run this command to" +
             " inspect how they differ: \nicdiff " +
             TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION.getAbsolutePath() + " " +
-            TEST_FUNCTINOSPATCHED_REFERENCE_LOCATION.getAbsolutePath(), identical);
+            TEST_FUNCTIONSPATCHED_REFERENCE_LOCATION.getAbsolutePath(), identical);
   }
 
   /**

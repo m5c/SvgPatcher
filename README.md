@@ -3,6 +3,9 @@
 Minimal DOM transformer that patches SVG files exported by OmniGraffle. Use this to prep your SVG files for integration
 in a webapp.
 
+![mavenci](https://github.com/m5c/SvgPatcher/actions/workflows/maven.yml/badge.svg)
+![checkstyle](https://img.shields.io/badge/checkstyle-google-blue)
+
 ## About
 
  > This software patches Omnigraffle-exported svg for convenient use as interactive web-UIs.

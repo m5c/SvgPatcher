@@ -6,8 +6,6 @@ import eu.kartoffelquadrat.svgpatcher.XmlInputOutputUtils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -41,7 +39,7 @@ public class SvGPatcherTest {
       new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/functionspatchedreference.svg");
 
   public static final File TEST_CSS_PATCHER_FILE_LOCATION =
-      new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/sample-custom-definition.css");
+      new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/sample-custom-definitions.css");
 
 
   /**

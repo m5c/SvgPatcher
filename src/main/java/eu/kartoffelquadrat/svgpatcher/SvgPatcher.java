@@ -53,7 +53,8 @@ public class SvgPatcher {
     new DimensionPatcher(svg).execute();
 
     // Patch (add) an internal CSS definition that prevents manual text selection on click
-    new CssPatcher(svg).execute();
+    String customCssFileReference = args[2];
+    new CssPatcher(svg, customCssFileReference).execute();
 
     // Add reference to a relative javascript file that defines functions for onclick actions.
     List<String> externalFunctions = new LinkedList<>(Arrays.asList(args));
@@ -62,6 +63,9 @@ public class SvgPatcher {
     // custom JS functions.
     externalFunctions.remove(0);
     externalFunctions.remove(0);
+    // The third argument is the CSS patcher reference
+    externalFunctions.remove(0);
+    // Remaining elements are actual JS function references.
     new FunctionReferencePatcher(svg, externalFunctions).execute();
 
     // Delete file if already exists (so it is actually replaced)

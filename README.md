@@ -8,7 +8,7 @@ in a webapp.
 
 ## About
 
- > This software patches Omnigraffle-exported svg for convenient use as interactive web-UIs.
+> This software patches Omnigraffle-exported svg for convenient use as interactive web-UIs.
 
 Like most of us, I favour designing a good game UI in a graphics program rather coding pure HTML and CSS.
 That being said, the interest of this repo is to support embedding SVGs into an HTML page, i.e., export of a fancy
@@ -20,15 +20,15 @@ However, there are some caveats, which is why I set up this repo:
   modify the UI's DOM tree. Unfortunately most SVG editors will not let you place element ids, so it's not trivial to
   get hold of the objects to modify. This patcher converts textual tags (set within onmigraffle) into standard svg/xml
   element IDs.
+* Similar to previous point, some zones in a gameUI are simply placeholders for nested internal UIs. This patcher
+  transforms marked zones so they contain a translation tag to ensure all elements of a nested UI are where they are
+  supposed to be.
 * Game UIs should be centered and optimally use space. This can be done with css, but requires some patching (meta
   attributes in your css). This patcher automatically sets those. That is, the generated svg is decorated with css that
   ensures your UI always optimally adjusts to the available space.
 * Game UIs should not have selectable text, that is, you don't want text to respond to mouse highlighting. This patcher
   embeds a tiny CSS in your svg that disables manual text selection.
-* Identifiable game elements may need to trigger game actions. You can optionally pass javascript files as command line
-  arguments, to embed within the svg file. The svg can only trigger embedded functions, which is why it may make sense
-  to register proxy calls within the svg.
-
+* Game UIs should not contain any svg `title` elements, for they cause ugly browser popups. The patcher removes them.
 
 ## Usage
 
@@ -38,9 +38,7 @@ However, there are some caveats, which is why I set up this repo:
   Explanation of arguments:
     * ```vectorBoard.svg```: Input SVG
     * ```patchedVectorBoard.svg```: Output SVG
-    * `src/text/resources/sample-custom-definitions`: Custom css definitions to add to svg.
-    * ```/gvg/uiactions.js```: First javascript function to reference (server path)
-    * ```/foo/baz.js```: Second javascript function to reference  (server path)
+    * `src/text/resources/sample-custom-definitions.css`: Custom css definitions to add to svg.
     * ```-Djavax.xml.accessExternalDTD=all```: See [DTD Troubleshoot](#dtd-troubleshoot)
 * Use patched SVG (exported to ```patchedVectorBoard.svg```) in webapp.  
   Sample [```patchedVectorBoard.svg```](patchedVectorBoard.svg), appears in a demo
@@ -55,7 +53,8 @@ List of applied patches:
 
 ### DTD Troubleshoot
 
-The SVG patcher interprets the provided svg as xml file and hence runs a DTD verification. This is by default restricted by the JVM and must be allowed manually.
+The SVG patcher interprets the provided svg as xml file and hence runs a DTD verification. This is by default restricted
+by the JVM and must be allowed manually.
 
 * When launched from IDE (IntelliJ): Add this option is in the run
   configuration: ```Runner``` -> ```VM Options``` -> ```"-Djavax.xml.accessExternalDTD=all"```
@@ -109,6 +108,30 @@ to:
     </text>
 </g>
 ```
+
+Similarly, the transformer detects elements with a `TID` (Template ID) prefix. These must not contain inner structure,
+as they only designate zones to be filled programmatically by nested other templates, using JS.
+
+Examples, this code:
+
+```xml
+
+<g id="Graphic_6">
+    <title>TID-SOMETEMPLATE</title>
+    <rect x="87.5" y="33.5" width="45" height="45" fill="white"/>
+</g>
+```
+
+Will be transformed to:
+
+```xml
+
+<g id="TID-SOMETEMPLATE" transform="translate(87.5,33.5)">
+</g>
+```
+
+> Note: Transformer will reject `TID` marked groups, if they contain anything but a single `title` and `rect` element.
+> In Omnigraffle, make sure no text is contained, and the zone showcases no stroke.
 
 ### SVG Dimensions
 

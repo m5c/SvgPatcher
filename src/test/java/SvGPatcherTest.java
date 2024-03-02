@@ -1,6 +1,5 @@
 import eu.kartoffelquadrat.svgpatcher.CssPatcher;
 import eu.kartoffelquadrat.svgpatcher.DimensionPatcher;
-import eu.kartoffelquadrat.svgpatcher.FunctionReferencePatcher;
 import eu.kartoffelquadrat.svgpatcher.IdPatcher;
 import eu.kartoffelquadrat.svgpatcher.XmlInputOutputUtils;
 import java.io.File;
@@ -33,10 +32,6 @@ public class SvGPatcherTest {
       new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/dimensionpatched.svg");
   public static final File TEST_DIMENSIONPATCHED_REFERENCE_LOCATION =
       new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/dimensionpatchedreference.svg");
-  public static final File TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION =
-      new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/functionspatched.svg");
-  public static final File TEST_FUNCTIONSPATCHED_REFERENCE_LOCATION =
-      new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/functionspatchedreference.svg");
 
   public static final File TEST_CSS_PATCHER_FILE_LOCATION =
       new File(TEST_RESOURCE_FOLDER.getAbsolutePath() + "/sample-custom-definitions.css");
@@ -118,31 +113,6 @@ public class SvGPatcherTest {
             " inspect how they differ: \nicdiff " +
             TEST_DIMENSIONPATCHED_OUTPUT_LOCATION.getAbsolutePath() + " " +
             TEST_DIMENSIONPATCHED_REFERENCE_LOCATION.getAbsolutePath(), identical);
-  }
-
-  /**
-   * Test if the string (not persisted to disk) when sample svg is only js function refs patched
-   * complies to what we expect.
-   */
-  @Test
-  public void testFunctionPatch()
-      throws IOException, SAXException, ParserConfigurationException, TransformerException {
-    Document svg = XmlInputOutputUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
-    List<String> sampleFunctionFiles = new LinkedList<>();
-    sampleFunctionFiles.add("/sampleBaseUlr/myFunnyFunctionBundle.js");
-    sampleFunctionFiles.add("/sampleBaseUlr/moreFunctionsBundle.js");
-
-    // Patch all IDs. This is the transformation we want to test
-    new FunctionReferencePatcher(svg, sampleFunctionFiles).execute();
-
-    // Verify the persisted svg content is as expected (verifies the above patch worked as expected)
-    boolean identical = exportAndCompareToExpected(svg, TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION,
-        TEST_FUNCTIONSPATCHED_REFERENCE_LOCATION);
-    Assert.assertTrue(
-        "Generated file with patched ids differs from expected output. Run this command to" +
-            " inspect how they differ: \nicdiff " +
-            TEST_FUNCTIONSPATCHED_OUTPUT_LOCATION.getAbsolutePath() + " " +
-            TEST_FUNCTIONSPATCHED_REFERENCE_LOCATION.getAbsolutePath(), identical);
   }
 
   /**

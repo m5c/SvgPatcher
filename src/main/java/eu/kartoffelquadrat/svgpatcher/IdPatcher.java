@@ -55,7 +55,7 @@ public class IdPatcher extends Patcher {
     // The below loop iterates over the title elements, not the "g" elements.
     NodeList allTitleNodes = svg.getElementsByTagName("title");
     System.out.println("Found " + allTitleNodes.getLength() + " <title> nodes in DOM.");
-    List<Node> titleNodesStagedForRemoval = new LinkedList<>();
+    List<Node> elementsStagedForRemoval = new LinkedList<>();
     for (Node titleNode : asList(allTitleNodes)) {
 
       // Get a hold of the parent <g> node, enclosing any <title> node we iterate over in this loop.
@@ -67,24 +67,58 @@ public class IdPatcher extends Patcher {
       if (isMarkedVectorElement(titleNode) || isMarkedTemplateElement(titleNode)) {
         // Amend the parent <g> node by an "id" attribute and mark the title node for deletion.
         parentGroupNode.setAttribute("id", titleNode.getTextContent());
-        titleNodesStagedForRemoval.add(titleNode);
+        elementsStagedForRemoval.add(titleNode);
       }
 
       // Only if this is a template (TID) marked node: ensure the payload is limited to a single
-      // rect element (besides title), and use rects x/y offset as additional tranlate
+      // rect element (besides title), and use rects x/y offset as additional translate
       // information for node parent.
       if (isMarkedTemplateElement(titleNode)) {
-        // For now adding a dummy translation as PoC:
-        parentGroupNode.setAttribute("transform", "translate=(42,42)");
+        // Ensure the enclosing group has not other elements but the title and empty background
+        // rectangle.
+        ensureTemplateIsFlat(parentGroupNode);
+
+        // Now that we know the structure is valid, access the one and only rect element
+        // contained in the parent, and use the x/y coordinates to mark translation in the parent.
+        Element rectangle = (Element) parentGroupNode.getElementsByTagName("rect").item(0);
+        String rectX = rectangle.getAttribute("x");
+        String rectY = rectangle.getAttribute("y");
+        parentGroupNode.setAttribute("transform", "translate(" + rectX + "," + rectY + ")");
+
+        // Stage the rect element for removal
+        elementsStagedForRemoval.add(rectangle);
       }
     }
 
     // Now that iteration over original document tree is finished, remove the obsolete elements.
-    for (Node obsoleteTitleNodes : titleNodesStagedForRemoval) {
+    for (Node obsoleteTitleNodes : elementsStagedForRemoval) {
       obsoleteTitleNodes.getParentNode().removeChild(obsoleteTitleNodes);
     }
 
     return svg;
+  }
+
+  /**
+   * Analyzes the internal DOM structure of the "g" element containing a TID marked title. There
+   * must not be any other elements inside than the title and the rect.
+   *
+   * @param parentGroupNode as the g element containing the TID tagged title element.
+   */
+  private void ensureTemplateIsFlat(Element parentGroupNode) {
+
+    // The root note actually has more nodes than actual DOM elements. To filter down to only the
+    // elements (deep), we use the asterisk operator.
+    NodeList templateContainedElements = parentGroupNode.getElementsByTagName("*");
+    Element firstElement = (Element) templateContainedElements.item(0);
+    Element secondElement = (Element) templateContainedElements.item(1);
+
+    if (!firstElement.getTagName().equals("title") && !secondElement.getTagName().equals("rect")) {
+      throw new MalformedDocumentException(
+          "Found a template indicator, but the internal structure contains more elements than it "
+              + "should. TID marked elements must only have a stroke-less, mono-coloured rectangle."
+              + "Other elements or deep structures are not allowed, since TID marks a template"
+              + "placeholder and all content will be replaced.");
+    }
   }
 
   private boolean isMarkedVectorElement(Node node) {

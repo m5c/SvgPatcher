@@ -1,31 +1,29 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="6000" preserveAspectRatio="xMidYMid meet" version="1.1" viewBox="151 174 225 113" width="8000" zoomAndPan="magnify">
-  <defs>
-    <font-face ascent="951.9958" cap-height="714" descent="-212.99744" font-family="Helvetica Neue" font-size="16" font-weight="400" panose-1="2 0 5 3 0 0 0 2 0 4" slope="0" underline-position="-100" underline-thickness="50" units-per-em="1000" x-height="517">
-      <font-face-src>
-        <font-face-name name="HelveticaNeue"/>
-      </font-face-src>
-    </font-face>
-  </defs>
-  <metadata> Produced by OmniGraffle 7.18.5\n2022-08-21 13:14:35 +0000</metadata>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="6000" preserveAspectRatio="xMidYMid meet" version="1.1" viewBox="-1 -1 226 114" width="8000" zoomAndPan="magnify">
+  <defs/>
   <g fill="none" fill-opacity="1" id="Canvas_1" stroke="none" stroke-dasharray="none" stroke-opacity="1">
     <title>Canvas 1</title>
+    <rect fill="white" height="114" width="226" x="-1" y="-1"/>
     <g id="Canvas_1_Layer_1">
       <title>Layer 1</title>
       <g id="Graphic_2">
         <title>VID-RECTANGLE1</title>
-        <rect fill="lime" height="112" width="112" x="151.5" y="174.5"/>
-        <rect height="112" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" width="112" x="151.5" y="174.5"/>
-        <text fill="black" transform="translate(156.5 221.276)">
-          <tspan fill="black" font-family="Helvetica Neue" font-size="16" font-weight="400" x="46.552" y="15">1</tspan>
+        <rect fill="lime" height="112" width="112" x="0" y="0"/>
+        <rect height="112" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" width="112" x="0" y="0"/>
+        <text fill="black" transform="translate(5 46.776)">
+          <tspan fill="black" font-family="Helvetica Neue" font-size="16" x="46.552" y="15">1</tspan>
         </text>
       </g>
       <g id="Graphic_5">
         <title>VID-RECTANGLE2</title>
-        <rect fill="red" height="112" width="112" x="263.5" y="174.5"/>
-        <rect height="112" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" width="112" x="263.5" y="174.5"/>
-        <text fill="black" transform="translate(268.5 221.276)">
-          <tspan fill="black" font-family="Helvetica Neue" font-size="16" font-weight="400" x="46.552" y="15">2</tspan>
+        <rect fill="red" height="112" width="112" x="112" y="0"/>
+        <rect height="112" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" width="112" x="112" y="0"/>
+        <text fill="black" transform="translate(117 46.776)">
+          <tspan fill="black" font-family="Helvetica Neue" font-size="16" x="46.552" y="15">2</tspan>
         </text>
+      </g>
+      <g id="Graphic_6">
+        <title>TID-SOMETEMPLATE</title>
+        <rect fill="white" height="45" width="45" x="87.5" y="33.5"/>
       </g>
     </g>
   </g>

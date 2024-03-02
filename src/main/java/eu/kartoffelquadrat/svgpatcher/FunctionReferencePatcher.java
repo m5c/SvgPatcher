@@ -7,6 +7,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+// TODO: FIGURE OUT IF THIS IS OBSOLETE... It seems actions can be conveniently registered from
+//  outside using a click listener. No need to embed here.
 
 /**
  * Helper class that adds additional script referencer tags as main nodes (one level below root).

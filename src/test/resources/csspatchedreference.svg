@@ -37,4 +37,6 @@
                 background: none;
                 }
                 svg { cursor: url('cursor.svg'), auto; }
+something { opacity: 0; }
+something:hover { opacity: 1; }
 </style></svg>

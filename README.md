@@ -3,6 +3,9 @@
 Minimal DOM transformer that patches SVG files exported by OmniGraffle. Use this to prep your SVG files for integration
 in a webapp.
 
+![mavenci](https://github.com/m5c/SvgPatcher/actions/workflows/maven.yml/badge.svg)
+![checkstyle](https://img.shields.io/badge/checkstyle-google-blue)
+
 ## About
 
  > This software patches Omnigraffle-exported svg for convenient use as interactive web-UIs.
@@ -31,12 +34,13 @@ However, there are some caveats, which is why I set up this repo:
 
 * Export your SVG with Omnigraffle (see placement of [tag descriptions](#patcher-details))
 * Launch the patcher:  
-  ```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg /gvg/uiactions.js /foo/baz.js" "-Djavax.xml.accessExternalDTD=all"```  
+  ```mvn clean package exec:java "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg src/test/resources/sample-custom-definitions.css /gvg/uiactions.js /foo/baz.js" "-Djavax.xml.accessExternalDTD=all"```  
   Explanation of arguments:
     * ```vectorBoard.svg```: Input SVG
     * ```patchedVectorBoard.svg```: Output SVG
-    * ```/gvg/uiactions.js```: First javascript function to reference
-    * ```/foo/baz.js```: Second javascript function to reference
+    * `src/text/resources/sample-custom-definitions`: Custom css definitions to add to svg.
+    * ```/gvg/uiactions.js```: First javascript function to reference (server path)
+    * ```/foo/baz.js```: Second javascript function to reference  (server path)
     * ```-Djavax.xml.accessExternalDTD=all```: See [DTD Troubleshoot](#dtd-troubleshoot)
 * Use patched SVG (exported to ```patchedVectorBoard.svg```) in webapp.  
   Sample [```patchedVectorBoard.svg```](patchedVectorBoard.svg), appears in a demo
@@ -58,7 +62,7 @@ The SVG patcher interprets the provided svg as xml file and hence runs a DTD ver
 * When launching form command line, provide this runtime JVM argument: e.g.
 
 ```bash
-mvn clean package exec:java "-Djavax.xml.accessExternalDTD=all" "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg /gvg/uiactions.js /foo/baz.js"
+mvn clean package exec:java "-Djavax.xml.accessExternalDTD=all" "-Dexec.args=vectorBoard.svg patchedVectorBoard.svg src/test/resources/sample-custom-definitions.css /gvg/uiactions.js /foo/baz.js"
 ```  
 
 (Note: For testing this option is auto enabled and not required. ```mvn clean test``` can be run as is. I was simply not
@@ -153,6 +157,8 @@ svg text::selection {
 ```
 
 As a result all text in your SVG is no longer manually selectable when displayed in a browser.
+
+If you need additional CSS definitions in the SVG file, add them to the file passed as third runtime argument.
 
 ## Dependencies
 

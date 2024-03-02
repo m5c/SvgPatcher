@@ -31,7 +31,8 @@ public class FunctionReferencePatcher extends Patcher {
   }
 
   /**
-   * Patches provided svg object with reference to prepared javascript function names.
+   * Patches provided svg object with reference to prepared javascript function names. Note that
+   * this is a reference to an external URL, not an in-svg reference.
    */
   @Override
   public Document execute() {
@@ -48,11 +49,6 @@ public class FunctionReferencePatcher extends Patcher {
       // Something like: <script xlink:href="/gvg/uiactions.js" />
       Element scriptReference = svg.createElement("script");
       scriptReference.setAttribute("xlink:href", scriptLocation);
-
-      // Remove default attributes we do not need: (For some reason these lines have no effect)
-      //            scriptReference.removeAttribute("xlink:actuate");
-      //            scriptReference.removeAttribute("xlink:show");
-      //            scriptReference.removeAttribute("xlink:type");
 
       // Actually add the element to the svg document
       root.appendChild(scriptReference);

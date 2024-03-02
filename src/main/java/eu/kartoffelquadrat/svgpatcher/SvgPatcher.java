@@ -30,10 +30,11 @@ public class SvgPatcher {
    * javascript frameworks can actually find them and conveniently modify the DOM.
    *
    * @param args first argument in input file to parse, second argument is where to store the target
-   *             file, all further arguments are references to javascript functions that must be
-   *             included by the svg. (Place those javascript files in your .../resources/static/
-   *             folder, then reference to them using your applications base url, e.g.:
-   *             /baseurl/uiactions.js)
+   *             file. Next argument is link to a file with custom css definitions (pass empty file
+   *             if not needed). All further arguments are references to javascript functions that
+   *             must be included by the svg. (Place those javascript files in your
+   *             .../resources/static/ folder, then reference to them using your applications base
+   *             url, e.g.: /baseurl/uiactions.js)
    * @throws IOException                  in case provided file can not be read
    * @throws SAXException                 in case provided file can not be interpreted as svg / does
    *                                      not comply to DTD
@@ -56,6 +57,7 @@ public class SvgPatcher {
     String customCssFileReference = args[2];
     new CssPatcher(svg, customCssFileReference).execute();
 
+    // TODO: Assess if this is obsolete. It seems JS issued click listeners are more effective.
     // Add reference to a relative javascript file that defines functions for onclick actions.
     List<String> externalFunctions = new LinkedList<>(Arrays.asList(args));
     // remove first two elements. The first two command line args are always file input and

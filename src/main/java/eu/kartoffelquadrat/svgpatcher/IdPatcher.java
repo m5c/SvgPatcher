@@ -58,6 +58,10 @@ public class IdPatcher extends Patcher {
     List<Node> elementsStagedForRemoval = new LinkedList<>();
     for (Node titleNode : asList(allTitleNodes)) {
 
+      // All title element must be removed, not just the ones with VID/TID prefix. Reason is that
+      // otherwise the browser creates hover overlay artifacts.
+      elementsStagedForRemoval.add(titleNode);
+
       // Get a hold of the parent <g> node, enclosing any <title> node we iterate over in this loop.
       Element parentGroupNode = (Element) titleNode.getParentNode();
 
@@ -67,7 +71,6 @@ public class IdPatcher extends Patcher {
       if (isMarkedVectorElement(titleNode) || isMarkedTemplateElement(titleNode)) {
         // Amend the parent <g> node by an "id" attribute and mark the title node for deletion.
         parentGroupNode.setAttribute("id", titleNode.getTextContent());
-        elementsStagedForRemoval.add(titleNode);
       }
 
       // Only if this is a template (TID) marked node: ensure the payload is limited to a single

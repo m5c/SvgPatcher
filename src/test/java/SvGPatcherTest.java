@@ -14,6 +14,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
 
 public class SvGPatcherTest {
 
@@ -54,6 +55,7 @@ public class SvGPatcherTest {
   @Test
   public void testIdPatch()
       throws IOException, SAXException, ParserConfigurationException, TransformerException {
+//    XML
     Document svg = XmlInputOutputUtils.parseXmlToDocument(TEST_INPUT_GRAPHIC.getAbsolutePath());
 
     // Patch all IDs. This is the transformation we want to test

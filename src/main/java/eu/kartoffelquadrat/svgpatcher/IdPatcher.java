@@ -88,8 +88,10 @@ public class IdPatcher extends Patcher {
         String rectY = rectangle.getAttribute("y");
         parentGroupNode.setAttribute("transform", "translate(" + rectX + "," + rectY + ")");
 
-        // Stage the rect element for removal
-        elementsStagedForRemoval.add(rectangle);
+        // Remove x/y information from rectangle, is implicit by the newly added parent translation.
+        rectangle.removeAttribute("x");
+        rectangle.removeAttribute("y");
+        // elementsStagedForRemoval.add(rectangle);
       }
     }
 

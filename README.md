@@ -183,6 +183,12 @@ As a result all text in your SVG is no longer manually selectable when displayed
 
 If you need additional CSS definitions in the SVG file, add them to the file passed as third runtime argument.
 
+## Speedups
+
+Most delay comes from downloading external DTDs referenced in some svgs.
+To speed up, skip DTD references by removing them from input svgs:  
+`sed -i '' '/DOCTYPE/d' *svg` (MacOS)
+
 ## Dependencies
 
 None, this is all built-in Java functionality  :)
